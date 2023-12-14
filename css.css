@@ -1,0 +1,20 @@
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    background: #2b2b2b; }
+
+table {
+    padding: 10px;
+    max-width: 1200px; }
+
+.dt-buttons{
+    margin-left: 20%;
+    max-width: 1200px
+}
+.dataTables_filter{
+    margin-right: 20%;
+}
