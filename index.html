@@ -3,6 +3,10 @@
         <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.8/b-2.4.2/b-colvis-2.4.2/sl-1.7.0/datatables.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
         <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.8/b-2.4.2/b-colvis-2.4.2/sl-1.7.0/datatables.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
         <script src="js.js"></script>
         <link href="css.css" media="screen" type="text/css" rel="stylesheet" />
     </head>
@@ -21,7 +25,6 @@
                     <th>PDEF(%)</th>
                     <th>MDEF(%)</th>
                     <th>HEAL(%)</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -35,19 +38,8 @@
                     <td>0</td>
                     <td>0</td>
                     <td>2</td>
-                    <td>1.2</td>
+                    <td>1</td>
                     <td>0</td>
-                    <td>
-                        <span class="material-symbols-outlined">
-                        edit
-                        </span>
-                        <span class="material-symbols-outlined">
-                            remove
-                        </span>
-                        <span class="material-symbols-outlined">
-                            save
-                        </span>
-                    </td>     
                 </tr>
                 <tr>
                     <td>Fira</td>
@@ -61,17 +53,6 @@
                     <td>0</td>
                     <td>0</td>
                     <td>1.1</td>
-                    <td>
-                        <span class="material-symbols-outlined">
-                        edit
-                        </span>
-                        <span class="material-symbols-outlined">
-                            remove
-                        </span>
-                        <span class="material-symbols-outlined">
-                            save
-                        </span>
-                    </td>     
                 </tr>
                 <tr>
                     <td>Aero</td>
@@ -85,19 +66,12 @@
                     <td>0</td>
                     <td>0</td>
                     <td>0</td>
-                    <td>
-                        <span class="material-symbols-outlined">
-                        edit
-                        </span>
-                        <span class="material-symbols-outlined">
-                            remove
-                        </span>
-                        <span class="material-symbols-outlined">
-                            save
-                        </span>
-                    </td>     
                 </tr>
             </tbody>
         </table>
     </body>
+    <div id="ex1" class="modal">
+        <p>Thanks for clicking. That felt good.</p>
+        <a href="#" rel="modal:close">Close</a>
+      </div>
 </html>

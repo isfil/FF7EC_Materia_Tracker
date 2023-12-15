@@ -18,3 +18,11 @@ table {
 .dataTables_filter{
     margin-right: 20%;
 }
+
+.dataTables_wrapper{
+    padding-top: 3%;
+}
+
+.modal {
+    background: #2b2b2b; 
+}
