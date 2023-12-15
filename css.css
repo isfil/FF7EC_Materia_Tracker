@@ -26,3 +26,13 @@ table {
 .modal {
     background: #2b2b2b; 
 }
+
+thead { 
+    position: sticky; 
+    top: 0; 
+    background: #2b2b2b;
+  } 
+
+.sorting {
+    border-bottom: 3px solid rgba(0, 0, 0, 0.5) !important;
+}
