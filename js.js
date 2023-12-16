@@ -19,6 +19,11 @@ $(document).ready(function() {
         edit(table)
     })
 
+    $(".buttons-save").on( "click", function(e) {
+        e.preventDefault()
+        save(table)
+    })
+
     table.on( 'select', function ( e, dt, type, indexes ) {
         if ( type === 'row' ) {
             data = dt.data();
@@ -56,6 +61,12 @@ function edit (table){
 
 function cleanForm(){
     $('#data_form').get(0).reset();
+}
+
+function save(table) {
+    var newdata = $('#data_form').find(':input').map(function(){return $(this).val();}).get();
+    table.row.add(newdata).draw(false)
+    $("#ex1 .close-modal").click()
 }
 
 console.log("Hello World");
