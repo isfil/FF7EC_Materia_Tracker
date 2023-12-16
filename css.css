@@ -110,3 +110,36 @@ thead {
 .hidden {
 	display: none !important;
 }
+
+
+.buttons-save {
+	background-color: #222222;
+	border: 1px solid transparent;
+	border-radius: 3px;
+	box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
+	box-sizing: border-box;
+	color: #fff;
+	cursor: pointer;
+	font-family: 'Helvetica Neue', Helvetica, Arial;
+	font-size: 13px;
+	padding: 10px 11.8em;
+	position: relative;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+	bottom: 5px
+  }
+  
+  .buttons-save:hover,
+  .buttons-save:focus {
+	background-color: #181818;
+  }
+  
+  .buttons-save:focus {
+	box-shadow: 0 0 0 4px #2b2b2b2f;
+  }
+  
+  .buttons-save:active {
+	background-color: #2b2b2b;
+	box-shadow: none;
+  }
