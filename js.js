@@ -1,43 +1,11 @@
 var data;
 
-
-var fields = [
-    [
-        "Aero",
-        "5",
-        "10",
-        "N/A",
-        "N/A",
-        "N/A",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-    ],
-    [
-        "Cura",
-        "5",
-        "10",
-        "N/A",
-        "N/A",
-        "N/A",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-    ]
-]
-
-
+console.log(localStorage.getItem("data"));
 $(document).ready(function() {
     var table = $('#myTable').DataTable({
     "bPaginate": false,
     "info": false,
-    data: fields,
+    data: JSON.parse(localStorage.getItem('data')),
     fixedHeader: true,
     select: true
     });
@@ -75,7 +43,6 @@ $(document).ready(function() {
 
 function create (table){
     cleanForm()
-    //table.row.add(["Hello","Foo","Bar","Cenas","Batata", 1,1,1,1,1,1]).draw(false)
     $("#ex1").modal({
         fadeDuration: 100
     });
@@ -104,6 +71,8 @@ function save(table) {
     } else {
         table.row.add(newdata).draw(false)
     }
+    
+    localStorage.setItem("data", JSON.stringify(table.rows().data().toArray()));
     
     $("#ex1 .close-modal").click()
 }
