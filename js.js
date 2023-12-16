@@ -5,6 +5,7 @@ $(document).ready(function() {
     var table = $('#myTable').DataTable({
     "bPaginate": false,
     "info": false,
+    fixedHeader: true,
     select: true
     });
 
@@ -22,13 +23,16 @@ $(document).ready(function() {
 });
 
 function create (table){
-    table.row.add(["Hello","Foo","Bar","Cenas","Batata", 1,1,1,1,1,1]).draw(false)
+    //table.row.add(["Hello","Foo","Bar","Cenas","Batata", 1,1,1,1,1,1]).draw(false)
+    $("#ex1").modal({
+        fadeDuration: 100
+    });
 }
 
 function edit (table){
     $("#ex1").modal({
         fadeDuration: 100
-      });
+    });
 
 }
 
