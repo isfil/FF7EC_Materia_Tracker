@@ -1,16 +1,48 @@
 var data;
 
 
+var fields = [
+    [
+        "Aero",
+        "5",
+        "10",
+        "N/A",
+        "N/A",
+        "N/A",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+    ],
+    [
+        "Cura",
+        "5",
+        "10",
+        "N/A",
+        "N/A",
+        "N/A",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+    ]
+]
+
+
 $(document).ready(function() {
     var table = $('#myTable').DataTable({
     "bPaginate": false,
     "info": false,
+    data: fields,
     fixedHeader: true,
     select: true
     });
 
     $('<div class="dt-buttons"><button class="dt-button buttons-create" tabindex="0" aria-controls="example" type="button"><span>New</span></button><button class="dt-button buttons-edit hidden" tabindex="0" aria-controls="example" type="button"><span>Edit</span></button></div>').insertBefore("#myTable_filter")
-    //$(".sorting").last().removeClass("sorting")
     $( ".buttons-create" ).on( "click", function() {
         create(table)
     })
@@ -50,6 +82,7 @@ function create (table){
 }
 
 function edit (table){
+    $('#data_form').addClass("edit")
     $('#data_form').find(':input').each(function(index){
         $(this).val(data[index]);
       });
@@ -60,13 +93,17 @@ function edit (table){
 }
 
 function cleanForm(){
+    $('#data_form').removeClass("edit");
     $('#data_form').get(0).reset();
 }
 
 function save(table) {
     var newdata = $('#data_form').find(':input').map(function(){return $(this).val();}).get();
-    table.row.add(newdata).draw(false)
+    if($('#data_form').hasClass('edit')){
+        table.row($('#myTable .selected').index()).data(newdata).draw();
+    } else {
+        table.row.add(newdata).draw(false)
+    }
+    
     $("#ex1 .close-modal").click()
 }
-
-console.log("Hello World");
