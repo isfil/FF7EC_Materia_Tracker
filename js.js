@@ -1,5 +1,5 @@
+var data;
 
-var icons= '<span class="material-symbols-outlined">edit</span><span class="material-symbols-outlined">remove</span><span class="material-symbols-outlined">save</span>'
 
 $(document).ready(function() {
     var table = $('#myTable').DataTable({
@@ -9,7 +9,7 @@ $(document).ready(function() {
     select: true
     });
 
-    $('<div class="dt-buttons"><button class="dt-button buttons-create" tabindex="0" aria-controls="example" type="button"><span>New</span></button><button class="dt-button buttons-edit" tabindex="0" aria-controls="example" type="button"><span>Edit</span></button></div>').insertBefore("#myTable_filter")
+    $('<div class="dt-buttons"><button class="dt-button buttons-create" tabindex="0" aria-controls="example" type="button"><span>New</span></button><button class="dt-button buttons-edit hidden" tabindex="0" aria-controls="example" type="button"><span>Edit</span></button></div>').insertBefore("#myTable_filter")
     //$(".sorting").last().removeClass("sorting")
     $( ".buttons-create" ).on( "click", function() {
         create(table)
@@ -19,10 +19,25 @@ $(document).ready(function() {
         edit(table)
     })
 
+    table.on( 'select', function ( e, dt, type, indexes ) {
+        if ( type === 'row' ) {
+            data = dt.data();
+            $('.buttons-edit').removeClass("hidden");
+        }
+    } );
+
+    table.on( 'deselect', function ( e, dt, type, indexes ) {
+        if ( type === 'row' ) {  
+            $('.buttons-edit').addClass("hidden");
+            cleanForm()
+        }
+    } );
+
     
 });
 
 function create (table){
+    cleanForm()
     //table.row.add(["Hello","Foo","Bar","Cenas","Batata", 1,1,1,1,1,1]).draw(false)
     $("#ex1").modal({
         fadeDuration: 100
@@ -30,10 +45,17 @@ function create (table){
 }
 
 function edit (table){
+    $('#data_form').find(':input').each(function(index){
+        $(this).val(data[index]);
+      });
     $("#ex1").modal({
         fadeDuration: 100
     });
 
+}
+
+function cleanForm(){
+    $('#data_form').get(0).reset();
 }
 
 console.log("Hello World");

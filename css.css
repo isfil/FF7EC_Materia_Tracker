@@ -106,3 +106,7 @@ thead {
 	color:red;
 	font-weight:normal;
 }
+
+.hidden {
+	display: none !important;
+}
