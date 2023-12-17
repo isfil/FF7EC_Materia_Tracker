@@ -11,8 +11,12 @@ table {
     padding: 10px;
     max-width: 1200px; }
 
-.dt-buttons{
-    margin-left: 20%;
+.crud_buttons{
+    margin-left: 18%;
+    max-width: 1200px
+}
+.ie_buttons{
+    margin-left: 45%;
     max-width: 1200px
 }
 .dataTables_filter{

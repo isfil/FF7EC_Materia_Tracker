@@ -10,7 +10,7 @@ $(document).ready(function() {
     select: true
     });
 
-    $('<div class="dt-buttons"><button class="dt-button buttons-create" tabindex="0" aria-controls="example" type="button"><span>New</span></button><button class="dt-button buttons-edit hidden" tabindex="0" aria-controls="example" type="button"><span>Edit</span></button></div>').insertBefore("#myTable_filter")
+    $('<div class="dt-buttons crud_buttons"><button class="dt-button buttons-create" tabindex="0" aria-controls="example" type="button"><span>New</span></button><button class="dt-button buttons-edit hidden" tabindex="0" aria-controls="example" type="button"><span>Edit</span></button></div>').insertBefore("#myTable_filter")
     $( ".buttons-create" ).on( "click", function() {
         create(table)
     })
@@ -24,15 +24,65 @@ $(document).ready(function() {
         save(table)
     })
 
+    $(".buttons-import").on( "click", function(e) {
+        e.preventDefault()
+        $('#import_file').click();
+    })
+
+    $('#import_file').change(function(){
+        var jsonFile = this.files[0];
+
+        var reader = new FileReader();
+        reader.onload = function() {
+            var fileContent = JSON.parse(reader.result);
+            if(isJsonValid(fileContent)){
+                table.clear().rows.add(fileContent).draw();
+                localStorage.setItem("data", JSON.stringify(table.rows().data().toArray()));
+            }
+
+            // Do something with fileContent
+            // document.getElementById('json-file').innerHTML = fileContent;  
+            };
+        reader.readAsText(jsonFile);
+        console.log("Cenas")
+    });
+
+    $(".buttons-export").on( "click", function() {
+        var json = JSON.stringify(table.rows().data().toArray());
+
+        // Create a new Blob object with the JSON data and set its type
+        var blob = new Blob([json], { type: 'application/json' });
+    
+        // Create a temporary URL for the file
+        var url = URL.createObjectURL(blob);
+    
+        // Create a new link element with the download attribute set to the desired filename
+        var link = document.createElement('a');
+        link.setAttribute('download', "data.json");
+    
+        // Set the link's href attribute to the temporary URL
+        link.href = url;
+    
+        // Simulate a click on the link to trigger the download
+        document.body.appendChild(link);
+        link.click();
+    
+        // Clean up the temporary URL and link element
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    })
+
     table.on( 'select', function ( e, dt, type, indexes ) {
         if ( type === 'row' ) {
             data = dt.data();
+            $('.buttons-create').addClass("hidden")
             $('.buttons-edit').removeClass("hidden");
         }
     } );
 
     table.on( 'deselect', function ( e, dt, type, indexes ) {
-        if ( type === 'row' ) {  
+        if ( type === 'row' ) { 
+            $('.buttons-create').removeClass("hidden"); 
             $('.buttons-edit').addClass("hidden");
             cleanForm()
         }
@@ -40,6 +90,15 @@ $(document).ready(function() {
 
     
 });
+
+function isJsonValid(json) {
+    json.every(element => {
+        if(element.length !== 12) {
+            return false
+        } 
+    });
+    return true;
+}
 
 function create (table){
     cleanForm()
