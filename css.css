@@ -5,7 +5,9 @@ body {
     font-weight: 400;
     color: #ffffff;
     -webkit-font-smoothing: antialiased;
-    background: #2b2b2b; }
+    background: #2b2b2b; 
+	overflow-x: hidden;
+}
 
 table {
     padding: 10px;
