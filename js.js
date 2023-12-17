@@ -10,13 +10,17 @@ $(document).ready(function() {
     select: true
     });
 
-    $('<div class="dt-buttons crud_buttons"><button class="dt-button buttons-create" tabindex="0" aria-controls="example" type="button"><span>New</span></button><button class="dt-button buttons-edit hidden" tabindex="0" aria-controls="example" type="button"><span>Edit</span></button></div>').insertBefore("#myTable_filter")
+    $('<div class="dt-buttons crud_buttons"><button class="dt-button buttons-create" tabindex="0" aria-controls="example" type="button"><span>New</span></button><button class="dt-button buttons-edit hidden" tabindex="0" aria-controls="example" type="button"><span>Edit</span></button><button class="dt-button buttons-remove hidden" tabindex="0" aria-controls="example" type="button"><span>delete</span></button></div>').insertBefore("#myTable_filter")
     $( ".buttons-create" ).on( "click", function() {
         create(table)
     })
 
     $( ".buttons-edit").on( "click", function() {
         edit(table)
+    })
+
+    $( ".buttons-remove").on( "click", function() {
+        remove(table);
     })
 
     $(".buttons-save").on( "click", function(e) {
@@ -76,7 +80,8 @@ $(document).ready(function() {
         if ( type === 'row' ) {
             data = dt.data();
             $('.buttons-create').addClass("hidden")
-            $('.buttons-edit').removeClass("hidden");
+            $('.buttons-edit').removeClass("hidden")
+            $('.buttons-remove').removeClass("hidden");
         }
     } );
 
@@ -84,6 +89,7 @@ $(document).ready(function() {
         if ( type === 'row' ) { 
             $('.buttons-create').removeClass("hidden"); 
             $('.buttons-edit').addClass("hidden");
+            $('.buttons-remove').addClass("hidden");
             cleanForm()
         }
     } );
@@ -116,6 +122,11 @@ function edit (table){
         fadeDuration: 100
     });
 
+}
+
+function remove(table){
+    table.rows( '.selected' ).remove().draw();
+    localStorage.setItem("data", JSON.stringify(table.rows().data().toArray()));
 }
 
 function cleanForm(){
