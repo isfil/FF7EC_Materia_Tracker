@@ -125,7 +125,7 @@ function cleanForm(){
 function save(table) {
     var newdata = $('#data_form').find(':input').map(function(){return $(this).val();}).get();
     if($('#data_form').hasClass('edit')){
-        table.row($('#myTable .selected').index()).data(newdata).draw();
+        table.row($('.selected')).data(newdata).draw();
     } else {
         table.row.add(newdata).draw(false)
     }
