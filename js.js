@@ -1,6 +1,5 @@
 var data;
 
-console.log(localStorage.getItem("data"));
 $(document).ready(function() {
     var table = $('#myTable').DataTable({
     "bPaginate": false,
@@ -10,7 +9,7 @@ $(document).ready(function() {
     select: true
     });
 
-    $('<div class="dt-buttons crud_buttons"><button class="dt-button buttons-create" tabindex="0" aria-controls="example" type="button"><span>New</span></button><button class="dt-button buttons-edit hidden" tabindex="0" aria-controls="example" type="button"><span>Edit</span></button><button class="dt-button buttons-remove hidden" tabindex="0" aria-controls="example" type="button"><span>delete</span></button></div>').insertBefore("#myTable_filter")
+    $('<div class="dt-buttons crud_buttons"><button class="dt-button buttons-create" tabindex="0" aria-controls="example" type="button"><span>New</span></button><button class="dt-button buttons-edit hidden" tabindex="0" aria-controls="example" type="button"><span>Edit</span></button><button class="dt-button buttons-remove hidden" tabindex="0" aria-controls="example" type="button"><span>Delete</span></button></div>').insertBefore("#myTable_filter")
     $( ".buttons-create" ).on( "click", function() {
         create(table)
     })
@@ -41,37 +40,26 @@ $(document).ready(function() {
             var fileContent = JSON.parse(reader.result);
             if(isJsonValid(fileContent)){
                 table.clear().rows.add(fileContent).draw();
-                localStorage.setItem("data", JSON.stringify(table.rows().data().toArray()));
+                localStorage.setItem("data", JSON.stringify(table.rows().data().toArray()));      
             }
-
-            // Do something with fileContent
-            // document.getElementById('json-file').innerHTML = fileContent;  
-            };
+        };
         reader.readAsText(jsonFile);
-        console.log("Cenas")
     });
 
     $(".buttons-export").on( "click", function() {
         var json = JSON.stringify(table.rows().data().toArray());
-
-        // Create a new Blob object with the JSON data and set its type
         var blob = new Blob([json], { type: 'application/json' });
     
-        // Create a temporary URL for the file
         var url = URL.createObjectURL(blob);
     
-        // Create a new link element with the download attribute set to the desired filename
         var link = document.createElement('a');
         link.setAttribute('download', "data.json");
     
-        // Set the link's href attribute to the temporary URL
         link.href = url;
     
-        // Simulate a click on the link to trigger the download
         document.body.appendChild(link);
         link.click();
     
-        // Clean up the temporary URL and link element
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
     })
@@ -108,7 +96,7 @@ function isJsonValid(json) {
 
 function create (table){
     cleanForm()
-    $("#ex1").modal({
+    $("#dialog").modal({
         fadeDuration: 100
     });
 }
@@ -118,7 +106,7 @@ function edit (table){
     $('#data_form').find(':input').each(function(index){
         $(this).val(data[index]);
       });
-    $("#ex1").modal({
+    $("#dialog").modal({
         fadeDuration: 100
     });
 
@@ -144,5 +132,5 @@ function save(table) {
     
     localStorage.setItem("data", JSON.stringify(table.rows().data().toArray()));
     
-    $("#ex1 .close-modal").click()
+    $("#dialog .close-modal").click()
 }
