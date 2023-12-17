@@ -43,7 +43,7 @@ thead {
 
 
 
-
+/*Modal Css*/
 .form-style-3{
 	max-width: 400px;
 	font-family: 'Helvetica Neue', Helvetica, Arial;
@@ -115,7 +115,7 @@ thead {
 	display: none !important;
 }
 
-
+/*Save Button on Modal Css*/
 .buttons-save {
 	background-color: #222222;
 	border: 1px solid transparent;
@@ -147,3 +147,5 @@ thead {
 	background-color: #2b2b2b;
 	box-shadow: none;
   }
+
+  /*NavBar Css*/
